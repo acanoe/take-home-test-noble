@@ -3,6 +3,7 @@
 ## Rules
 1. Cannot alter the field and table names of existing models
 2. Use Bearer Token based as API Authentication
+3. Push your answer on your public repo and send the url link to jefri.arbi@noble-software.com
 
 ## Issues
 1. Solve the circular dependency and migration issues
