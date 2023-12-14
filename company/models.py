@@ -10,3 +10,5 @@ class Company(UserTimestampedAbstract):
     name = models.CharField(max_length=200)
     industry = models.CharField(max_length=200, choices=IndustryChoices.choices)
     
+    def __str__(self):
+        return self.name
