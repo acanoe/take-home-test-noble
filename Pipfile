@@ -99,6 +99,8 @@ webencodings = "==0.5.1"
 xhtml2pdf = "==0.2.9"
 
 [dev-packages]
+black = "*"
+ruff = "*"
 
 [requires]
 python_version = "3.11"
