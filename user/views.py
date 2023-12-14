@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -11,6 +12,9 @@ from .serializers import EmployeeSerializer, OwnerSerializer
 class OwnerView(APIView):
     serializer_class = OwnerSerializer
 
+    @extend_schema(
+        description="Requirement 2: Endpoint to create a owner account.\n\nThis will create a new user with user_type = UserTypeChoices.OWNER with is_staff = True.",
+    )
     def post(self, request):
         serializer = self.serializer_class(
             data=request.data,
@@ -25,6 +29,9 @@ class OwnerView(APIView):
 class EmployeeView(CompanyOwnerAPI):
     serializer_class = EmployeeSerializer
 
+    @extend_schema(
+        description="Requirement 5: Endpoint to show all employee accounts.\n\nThis will list all users with user_type = UserTypeChoices.EMPLOYEE with company set to the logged in user's company.\n\nNote: Only users with user_type = UserTypeChoices.OWNER can list all employee accounts.",
+    )
     def get(self, request):
         users = User.objects.filter(
             user_type=UserTypeChoices.EMPLOYEE,
@@ -33,6 +40,9 @@ class EmployeeView(CompanyOwnerAPI):
         serializer = self.serializer_class(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @extend_schema(
+        description="Requirement 5: Endpoint to create a employee account.\n\nThis will create a new user with user_type = UserTypeChoices.EMPLOYEE with company set to the logged in user's company.\n\nNote: Only users with user_type = UserTypeChoices.OWNER can create a employee account.",
+    )
     def post(self, request):
         serializer = self.serializer_class(
             data=request.data,
