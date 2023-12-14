@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import User
+
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    fields = ("email", "company", "is_superuser", "is_active")
+    list_display = ("email", "company", "is_superuser", "is_active")
