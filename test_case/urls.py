@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+from .auth.serializer import CustomPairTokenSerializer
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -29,4 +35,14 @@ urlpatterns += [
         SpectacularSwaggerView.as_view(url_name="schemav1"),
         name="swagger-ui",
     ),
+]
+
+# login views
+urlpatterns += [
+    path(
+        "auth/login/",
+        TokenObtainPairView.as_view(serializer_class=CustomPairTokenSerializer),
+        name="token_obtain_pair",
+    ),
+    path("auth/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

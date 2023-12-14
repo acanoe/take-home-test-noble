@@ -157,6 +157,12 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+# DJANGORESTFRAMEWORK-SIMPLEJWT
+SIMPLE_JWT = {
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+}
 
 # AUTH_CONF
 AUTH_USER_MODEL = "user.User"
+AUTHENTICATION_BACKENDS = ["test_case.auth.backend.EmailAsUsernameAuth"]
