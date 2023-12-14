@@ -81,10 +81,6 @@ class UserAdmin(admin.ModelAdmin):
         return super().render_change_form(request, context, add, change, form_url, obj)
 
     def save_model(self, request, obj, form, change):
-        print(form.cleaned_data)
-        print(form.changed_data)
-        print(change)
-
         # while the user is being created, fill username and user_type fields with
         # default values if needed
         if not change:
