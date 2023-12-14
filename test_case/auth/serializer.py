@@ -26,8 +26,6 @@ class CustomPairTokenSerializer(TokenObtainSerializer):
             authenticate_kwargs["request"] = self.context["request"]
 
         self.user = authenticate(**authenticate_kwargs)
-        if not self.user:
-            print("self.user", self.user)
 
         if not api_settings.USER_AUTHENTICATION_RULE(self.user):
             raise exceptions.AuthenticationFailed(
