@@ -19,7 +19,7 @@ class OwnerSerializer(BaseUserSerializer):
     def create(self, validated_data):
         validated_data.update(
             {
-                "username": validated_data["email"].split("@")[0],
+                "username": validated_data["email"].replace("@", "_").replace(".", "_"),
                 "user_type": UserTypeChoices.OWNER,
                 "is_staff": True,
             }
@@ -40,7 +40,7 @@ class EmployeeSerializer(BaseUserSerializer):
     def create(self, validated_data):
         validated_data.update(
             {
-                "username": validated_data["email"].split("@")[0],
+                "username": validated_data["email"].replace("@", "_").replace(".", "_"),
                 "user_type": UserTypeChoices.EMPLOYEE,
                 "company": self.context["request"].user.company,
             }
